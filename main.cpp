@@ -1,23 +1,19 @@
 #include "CheckoutSystem.cpp"
 
 int main() {
-    // Create an array of Item objects
-    Item items[] = {
-        Item("Apple", 0.5, 10),
-        Item("Milk", 1.2, 20),
-        Item("Bread", 1.0, 15)
-    };
+    CheckoutSystem* checkout_system = new CheckoutSystem(); // Dynamically allocate CheckoutSystem
 
-    // Initialize the CheckoutSystem
-    CheckoutSystem checkout_system;
+    // Dynamically allocate items
+    Item* apple = new Item("Apple", 0.5, 10);
+    Item* milk = new Item("Milk", 1.2, 20);
 
-    // Add items from the array to the checkout system
-    for (const auto& item : items) {
-        checkout_system.add_item(item);
-    }
+    checkout_system->add_item(apple);
+    checkout_system->add_item(milk);
 
-    // Display the items in the checkout system
-    checkout_system.display_items();
+    checkout_system->display_items();
+
+    // Cleanup dynamically allocated memory
+    delete checkout_system; // Will call the destructor of CheckoutSystem
 
     return 0;
 }
