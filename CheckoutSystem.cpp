@@ -21,11 +21,11 @@ void CheckoutSystem::display_items() const {
     for (size_t i = 0; i < this->items.size(); ++i) {
         const Item& item = this->items[i];
         cout << i + 1 << ". " << item.get_name() << " - $" << item.get_price()
-             << " (Stock: " << item.get_stock() << ")\n";
+              << " (Stock: " << item.get_stock() << ")\n";
     }
 }
 
 void CheckoutSystem::display_total_sales() const {
-    cout << "Total items sold: " << Item::total_items_sold << "\n";
+    cout << "Total items sold: " << Item::get_total_items_sold() << "\n";
     cout << "Total revenue: $" << Item::get_total_revenue() << "\n";
 }

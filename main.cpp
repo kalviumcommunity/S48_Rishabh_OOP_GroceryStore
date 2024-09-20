@@ -1,4 +1,5 @@
 #include "CheckoutSystem.cpp"
+#include <iostream>
 
 int main() {
     Item apple("Apple", 0.5, 10);
@@ -8,12 +9,14 @@ int main() {
     checkout_system.add_item(apple);
     checkout_system.add_item(milk);
 
-    // Simulate a purchase
-    apple.update_stock(3);  // 3 apples purchased
-    milk.update_stock(2);   // 2 milk cartons purchased
-
     checkout_system.display_items();
-    checkout_system.display_total_sales();  // Display total sales and revenue
+
+    // Simulate selling some items
+    apple.update_stock(2);  // Sold 2 apples
+    milk.update_stock(3);    // Sold 3 bottles of milk
+
+    // Display total sales and revenue
+    checkout_system.display_total_sales();
 
     return 0;
 }
