@@ -1,3 +1,4 @@
+#include <iostream>
 #include "CheckoutSystem.cpp"
 
 int main() {

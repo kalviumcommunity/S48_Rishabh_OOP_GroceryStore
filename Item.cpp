@@ -3,9 +3,6 @@ using namespace std;
 
 class Item {
 public:
-    static int total_items_sold;   // Static variable to track total items sold
-    static double total_revenue;   // Static variable to track total revenue
-
     // Constructor
     Item(const string& name, double price, int stock)
         : name(name), price(price), stock(stock) {}
@@ -30,15 +27,16 @@ public:
         return false;
     }
 
-    // Static function to get the total revenue
-    static double get_total_revenue() {
-        return total_revenue;
-    }
+    // Static functions to get the total revenue and items sold
+    static double get_total_revenue() { return total_revenue; }
+    static int get_total_items_sold() { return total_items_sold; }
 
 private:
-    string name;
-    double price;
-    int stock;
+    static int total_items_sold;   // Static variable to track total items sold
+    static double total_revenue;   // Static variable to track total revenue
+    string name;                   // Private member
+    double price;                  // Private member
+    int stock;                     // Private member
 };
 
 // Initialize static variables

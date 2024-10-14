@@ -23,20 +23,20 @@ public:
 
     // Display the items in the system
     void display_items() const {
-        cout << "Available items:\n";
+        std::cout << "Available items:\n";
         for (size_t i = 0; i < this->items.size(); ++i) {
             const Item& item = this->items[i];
-            cout << i + 1 << ". " << item.get_name() << " - $" << item.get_price()
-                 << " (Stock: " << item.get_stock() << ")\n";
+            std::cout << i + 1 << ". " << item.get_name() << " - $" << item.get_price()
+                      << " (Stock: " << item.get_stock() << ")\n";
         }
     }
 
     // Display total sales and revenue
     void display_total_sales() const {
-        cout << "Total items sold: " << Item::total_items_sold << "\n";
-        cout << "Total revenue: $" << Item::get_total_revenue() << "\n";
+        std::cout << "Total items sold: " << Item::get_total_items_sold() << "\n";
+        std::cout << "Total revenue: $" << Item::get_total_revenue() << "\n";
     }
 
 private:
-    vector<Item> items;
+    vector<Item> items; // Private member to hold items
 };
