@@ -2,6 +2,14 @@
 #include "CheckoutSystem.cpp"
 
 int main() {
+    // Using the default constructor
+    Item default_item;
+    default_item.set_price(2.0);
+    default_item.set_stock(5);
+    std::cout << "Default item created: " << default_item.get_name() << " - $" 
+              << default_item.get_price() << " (Stock: " << default_item.get_stock() << ")\n";
+
+    // Using parameterized constructor
     Item apple("Apple", 0.5, 10);
     Item milk("Milk", 1.2, 20);
 

@@ -1,11 +1,24 @@
 #include <string>
+#include <iostream>
 using namespace std;
 
 class Item {
 public:
-    // Constructor
+    // Default constructor
+    Item() : name("Unknown"), price(0.0), stock(0) {
+        cout << "Default constructor called for item: " << name << endl;
+    }
+
+    // Parameterized constructor
     Item(const string& name, double price, int stock)
-        : name(name), price(price), stock(stock) {}
+        : name(name), price(price), stock(stock) {
+        cout << "Parameterized constructor called for item: " << name << endl;
+    }
+
+    // Destructor
+    ~Item() {
+        cout << "Destructor called for item: " << name << endl;
+    }
 
     // Accessor methods (getters)
     string get_name() const { return this->name; }
