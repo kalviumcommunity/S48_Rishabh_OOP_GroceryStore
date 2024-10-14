@@ -6,13 +6,20 @@ public:
     static int total_items_sold;   // Static variable to track total items sold
     static double total_revenue;   // Static variable to track total revenue
 
+    // Constructor
     Item(const string& name, double price, int stock)
         : name(name), price(price), stock(stock) {}
 
+    // Accessor methods (getters)
     string get_name() const { return this->name; }
     double get_price() const { return this->price; }
     int get_stock() const { return this->stock; }
 
+    // Mutator methods (setters)
+    void set_price(double new_price) { this->price = new_price; }
+    void set_stock(int new_stock) { this->stock = new_stock; }
+
+    // Method to update stock and track total items sold and revenue
     bool update_stock(int quantity) {
         if (quantity <= this->stock) {
             this->stock -= quantity;
