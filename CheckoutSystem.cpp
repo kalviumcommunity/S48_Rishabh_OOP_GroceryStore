@@ -6,28 +6,16 @@ class CheckoutSystem {
 public:
     // Add an item to the system
     void add_item(const Item& item) {
-        this->items.push_back(item);
-    }
-
-    // Accessor method (getter)
-    vector<Item> get_items() const {
-        return this->items;
-    }
-
-    // Mutator method (setter)
-    void set_item_price(int index, double new_price) {
-        if (index >= 0 && index < items.size()) {
-            items[index].set_price(new_price);  // Set a new price for the item
-        }
+        this->items.push_back(&item);  // Store pointers for polymorphism
     }
 
     // Display the items in the system
     void display_items() const {
         std::cout << "Available items:\n";
         for (size_t i = 0; i < this->items.size(); ++i) {
-            const Item& item = this->items[i];
-            std::cout << i + 1 << ". " << item.get_name() << " - $" << item.get_price()
-                      << " (Stock: " << item.get_stock() << ")\n";
+            const Item* item = this->items[i];  // Access the item via pointer
+            std::cout << i + 1 << ". " << item->get_name() << " - $" << item->get_price()
+                      << " (Stock: " << item->get_stock() << ")\n";
         }
     }
 
@@ -38,5 +26,5 @@ public:
     }
 
 private:
-    vector<Item> items; // Private member to hold items
+    std::vector<const Item*> items; // Use a vector of pointers for polymorphism
 };

@@ -16,13 +16,15 @@ public:
     }
 
     // Destructor
-    ~Item() {
+    virtual ~Item() {
         cout << "Destructor called for item: " << name << endl;
     }
 
+    // Virtual method for price, allowing derived classes to override it
+    virtual double get_price() const { return this->price; }
+
     // Accessor methods (getters)
     string get_name() const { return this->name; }
-    double get_price() const { return this->price; }
     int get_stock() const { return this->stock; }
 
     // Mutator methods (setters)
@@ -44,12 +46,14 @@ public:
     static double get_total_revenue() { return total_revenue; }
     static int get_total_items_sold() { return total_items_sold; }
 
+protected:
+    string name;
+    double price;
+    int stock;
+
 private:
     static int total_items_sold;   // Static variable to track total items sold
     static double total_revenue;   // Static variable to track total revenue
-    string name;                   // Private member
-    double price;                  // Private member
-    int stock;                     // Private member
 };
 
 // Initialize static variables
