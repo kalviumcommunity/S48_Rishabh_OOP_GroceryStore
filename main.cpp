@@ -96,9 +96,15 @@ private:
 // Define the CheckoutSystem class
 class CheckoutSystem {
 public:
-    // Add an item to the system
+    // Add an item to the system using an Item object
     void add_item(const Item& item) {
         this->items.push_back(&item);  // Store pointers for polymorphism
+    }
+
+    // Overloaded add_item method to add an item by providing item details directly
+    void add_item(const string& name, double price, int stock) {
+        Item* new_item = new Item(name, price, stock);
+        this->items.push_back(new_item);
     }
 
     // Display the items in the system
@@ -115,6 +121,13 @@ public:
     void display_total_sales() const {
         cout << "Total items sold: " << Item::get_total_items_sold() << "\n";
         cout << "Total revenue: $" << Item::get_total_revenue() << "\n";
+    }
+
+    // Destructor to free memory for dynamically created items
+    ~CheckoutSystem() {
+        for (auto item : items) {
+            delete item;
+        }
     }
 
 private:
@@ -136,6 +149,9 @@ int main() {
     checkout_system.add_item(default_item);
     checkout_system.add_item(apple);
     checkout_system.add_item(milk);
+    
+    // Add a new item using the overloaded add_item function
+    checkout_system.add_item("Banana", 0.3, 15);
 
     // Simulate a purchase
     apple.update_stock(3);  // 3 apples purchased

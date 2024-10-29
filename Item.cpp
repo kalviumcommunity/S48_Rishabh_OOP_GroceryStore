@@ -16,15 +16,13 @@ public:
     }
 
     // Destructor
-    virtual ~Item() {
+    ~Item() {
         cout << "Destructor called for item: " << name << endl;
     }
 
-    // Virtual method for price, allowing derived classes to override it
-    virtual double get_price() const { return this->price; }
-
     // Accessor methods (getters)
     string get_name() const { return this->name; }
+    virtual double get_price() const { return this->price; }  // Make this virtual for polymorphism
     int get_stock() const { return this->stock; }
 
     // Mutator methods (setters)
@@ -47,7 +45,7 @@ public:
     static int get_total_items_sold() { return total_items_sold; }
 
 protected:
-    string name;
+    string name;    // Protected so derived classes can access it
     double price;
     int stock;
 
