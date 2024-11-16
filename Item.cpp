@@ -32,16 +32,19 @@ public:
     void set_price(double new_price) { this->price = new_price; }
     void set_stock(int new_stock) { this->stock = new_stock; }
 
-    bool update_stock(int quantity) {
-        if (quantity <= this->stock) {
-            this->stock -= quantity;
-            return true;
-        }
-        return false;
-    }
+    bool update_stock(int quantity);
 
 private:
     string name;
     double price;
     int stock;
 };
+
+bool Item::update_stock(int quantity) {
+    if (quantity <= this->stock) {
+        this->stock -= quantity;
+        SalesTracker::add_sale(quantity, this->price); // Delegate the sales tracking
+        return true;
+    }
+    return false;
+}
