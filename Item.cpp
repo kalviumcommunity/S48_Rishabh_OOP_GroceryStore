@@ -1,5 +1,5 @@
-#include <string>
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Product {
@@ -35,25 +35,13 @@ public:
     bool update_stock(int quantity) {
         if (quantity <= this->stock) {
             this->stock -= quantity;
-            total_items_sold += quantity;
-            total_revenue += quantity * price;
             return true;
         }
         return false;
     }
 
-    static double get_total_revenue() { return total_revenue; }
-    static int get_total_items_sold() { return total_items_sold; }
-
-protected:
+private:
     string name;
     double price;
     int stock;
-
-private:
-    static int total_items_sold;
-    static double total_revenue;
 };
-
-int Item::total_items_sold = 0;
-double Item::total_revenue = 0.0;

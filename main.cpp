@@ -3,6 +3,9 @@
 #include <string>
 using namespace std;
 
+// Forward declaration of SalesTracker
+class SalesTracker;
+
 // Define the abstract Product class
 class Product {
 public:
@@ -35,31 +38,42 @@ public:
     void set_price(double new_price) { this->price = new_price; }
     void set_stock(int new_stock) { this->stock = new_stock; }
 
-    bool update_stock(int quantity) {
-        if (quantity <= this->stock) {
-            this->stock -= quantity;
-            total_items_sold += quantity;
-            total_revenue += quantity * price;
-            return true;
-        }
-        return false;
-    }
-
-    static double get_total_revenue() { return total_revenue; }
-    static int get_total_items_sold() { return total_items_sold; }
+    bool update_stock(int quantity);
 
 protected:
     string name;
     double price;
     int stock;
+};
+
+// Static members for sales tracking (moved out of the class)
+class SalesTracker {
+public:
+    static void add_sale(int quantity, double price) {
+        total_items_sold += quantity;
+        total_revenue += quantity * price;
+    }
+
+    static int get_total_items_sold() { return total_items_sold; }
+    static double get_total_revenue() { return total_revenue; }
 
 private:
     static int total_items_sold;
     static double total_revenue;
 };
 
-int Item::total_items_sold = 0;
-double Item::total_revenue = 0.0;
+int SalesTracker::total_items_sold = 0;
+double SalesTracker::total_revenue = 0.0;
+
+// Method implementation for Item (defined after SalesTracker is available)
+bool Item::update_stock(int quantity) {
+    if (quantity <= this->stock) {
+        this->stock -= quantity;
+        SalesTracker::add_sale(quantity, this->price); // Delegate the sales tracking
+        return true;
+    }
+    return false;
+}
 
 class DiscountedItem : public Item {
 public:
@@ -103,8 +117,8 @@ public:
     }
 
     void display_total_sales() const {
-        cout << "Total items sold: " << Item::get_total_items_sold() << "\n";
-        cout << "Total revenue: $" << Item::get_total_revenue() << "\n";
+        cout << "Total items sold: " << SalesTracker::get_total_items_sold() << "\n";
+        cout << "Total revenue: $" << SalesTracker::get_total_revenue() << "\n";
     }
 
 private:
